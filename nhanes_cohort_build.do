@@ -1,3 +1,10 @@
+*******
+* STATA CODE FOR CREATING THE MERGED NHANES-NDI (1999-2011) FILES
+* TO DOWNLOAD DATASETS [.XPT] AND CODEBOOKS, 
+* SEE: https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx 
+* AND: https://www.cdc.gov/nchs/data-linkage/mortality-public.htm
+*******
+
 clear
 fdause "/Users/sbasu/Data/NHANES/1999-2000/DEMO.xpt"
 sort seqn
