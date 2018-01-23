@@ -1,9 +1,7 @@
 
 # TO DOS:
-# add nutrition for years after 2000
-# add food groups
-# add HEI, AHEI, MDS, DASH score, refit ASCVD for CVD mort only
-# add time to event/survival models/censoring
+# add HEI, AHEI, MDS, DASH score, refit ASCVD risk score for CVD mort only
+# consider time to event/survival models/censoring rather than logistic alone
 
 
 detach()
