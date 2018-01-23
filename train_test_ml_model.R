@@ -249,6 +249,7 @@ nhall$cvdhx[is.na(nhall$cvdhx)==1]=0
 nhall$dm[is.na(nhall$dm)==1]=0
 nhall$cvddeath[is.na(nhall$cvddeath)==1]=0
 
+# impute missing values using multiple imputation for chained equations
 library(mice)
 nhallsubnames = setdiff(names(nhall),c("mortstat","ucod_leading","permth_int","diq010","diq070","dodqtr","dodyear"))
 nhallsub = nhall[,nhallsubnames]
@@ -307,9 +308,9 @@ lb <- aml@leaderboard
 lb
 
 # model_id      auc  logloss
-# 1 StackedEnsemble_BestOfFamily_0_AutoML_20180122_073837 0.999768 0.006153
-# 2    StackedEnsemble_AllModels_0_AutoML_20180122_073837 0.999768 0.006153
-# 3                          DRF_0_AutoML_20180122_073837 0.999767 0.006493
+# 1                          DRF_0_AutoML_20180123_123803 0.999696 0.006290
+# 2 StackedEnsemble_BestOfFamily_0_AutoML_20180123_123803 0.999696 0.005736
+# 3    StackedEnsemble_AllModels_0_AutoML_20180123_123803 0.999696 0.005736
 
 # The leader model is stored here
 aml@leader
@@ -328,11 +329,13 @@ print(model_path)
 # load the model
 saved_model <- h2o.loadModel(model_path)
 
+# test a GRF
 testmodel = h2o.randomForest(x = x, y = y, training_frame = train, ntrees=500, max_depth = 100)
 summary(testmodel)
 
 pred <-predict(testmodel, test)  
 
+# need to assess calibration, discrimination here
 
 ### THE SCRIPTS BELOW ARE OLD FUNCTIONS FOR ASSESSING CALIBRAITON; CAN REPLACE WITH HOSMER-LEMESHOW TEST FOR LOGISTIC OUTCOMES; THE FUNCTIONS BELOW ARE FOR SURVIVAL/TIME-TO-EVENT DATA
 
